@@ -409,7 +409,8 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1
+//Should be 5 for the V6 hotend
+#define TEMP_SENSOR_0 5
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -466,7 +467,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 275
+#define HEATER_0_MAXTEMP 285
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -512,12 +513,16 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_Kp  22.20
-  #define DEFAULT_Ki 1.38
-  #define DEFAULT_Kd 68.02
 
-    #define DEFAULT_Ki   1.08
-    #define DEFAULT_Kd 114.00
+    // E3D V6 hotend calibrated.
+    // 11 Oct 2020
+    #define DEFAULT_Kp 28.85
+    #define DEFAULT_Ki 2.45
+    #define DEFAULT_Kd 84.93
+
+    // #define DEFAULT_Kp  22.20
+    // #define DEFAULT_Ki 1.38
+    // #define DEFAULT_Kd 68.02
   #endif
 #endif // PIDTEMP
 
@@ -811,7 +816,7 @@
 //ENDER5 settings for 16 steps
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 93 }
 //ENDER5 settings for 32 steps
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 1600, 186 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 1600, 196 }
 //ENDER5 settings for 128 steps
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 6400, 744 }
 //ENDER5 settings for 256 steps <-- didn't seem to work well
@@ -901,8 +906,8 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-// TODO I think I'd like this
-#define S_CURVE_ACCELERATION
+// Not enabling this, as it conflicts with Linear Advance
+//#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1071,7 +1076,11 @@
  *     O-- FRONT --+
  */
 //ENDER5 NOT CORRECT !!! TODO
-#define NOZZLE_TO_PROBE_OFFSET { -43.1, 6.6, 0 }
+//Updating for Hero ME Gen 5 and V6 hotend.
+//54 Left of hotend
+//14 ahead
+// #define NOZZLE_TO_PROBE_OFFSET { -43.1, 6.6, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { -54.0,-14.0, 0 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1252,7 +1261,9 @@
 
 // The size of the print bed
 #define X_BED_SIZE 220
-#define Y_BED_SIZE 220
+// 10 Oct 2020, lost 9mm thanks to the Hero ME hotend thing
+// Until I can figure out how to move the endstop in the back, back 9mm
+#define Y_BED_SIZE 220-9
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1587,6 +1598,8 @@
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
 //#define MANUAL_X_HOME_POS 0
+// Hero ME moves it forward by 9mm
+#define MANUAL_Y_HOME_PAS -9
 //#define MANUAL_Y_HOME_POS 0
 //#define MANUAL_Z_HOME_POS 0
 
@@ -1717,18 +1730,19 @@
 
 //
 // Preheat Constants - Up to 5 are supported without changes
+//Halfing fan speed, because I have dual 5015s now
 //
 #define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 185
 #define PREHEAT_1_TEMP_BED     70
 #define PREHEAT_1_TEMP_CHAMBER 35
-#define PREHEAT_1_FAN_SPEED   255 // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED   127 // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "ABS"
 #define PREHEAT_2_TEMP_HOTEND 240
 #define PREHEAT_2_TEMP_BED    110
 #define PREHEAT_2_TEMP_CHAMBER 35
-#define PREHEAT_2_FAN_SPEED   255 // Value from 0 to 255
+#define PREHEAT_2_FAN_SPEED   127 // Value from 0 to 255
 
 /**
  * Nozzle Park
