@@ -418,8 +418,9 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-// ENDER5 BED Temp sensor
-#define TEMP_SENSOR_BED 1
+//New Gulfcoast Robotics NTC3950 Thermistor
+// https://gulfcoast-robotics.com/pages/ntc3950
+#define TEMP_SENSOR_BED 11
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -561,12 +562,17 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 122.51
-  #define DEFAULT_bedKi 23.83
-  #define DEFAULT_bedKd 419.79
+  // #define DEFAULT_bedKp 122.51
+  // #define DEFAULT_bedKi 23.83
+  // #define DEFAULT_bedKd 419.79
   // #define DEFAULT_bedKp 10.00
   // #define DEFAULT_bedKi .023
   // #define DEFAULT_bedKd 305.4
+
+  //Measured parameters from the new Gulfcoast robotics silicone heater!
+  #define DEFAULT_bedKp 111.56
+  #define DEFAULT_bedKi 20.60
+  #define DEFAULT_bedKd 402.77
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
