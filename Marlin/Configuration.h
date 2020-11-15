@@ -131,7 +131,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Ender 5v6"
+#define CUSTOM_MACHINE_NAME "Ender 5v6 BMG"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -821,8 +821,9 @@
  */
 //ENDER5 settings for 16 steps
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 93 }
-//ENDER5 settings for 32 steps
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 1600, 196 }
+// Bondtech BMG starts with 415 steps per unit when using 16 steps
+//Going back to 16 steps, because I think it'll work better. Maybe?
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 415 }
 //ENDER5 settings for 128 steps
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 6400, 744 }
 //ENDER5 settings for 256 steps <-- didn't seem to work well
@@ -1232,7 +1233,8 @@
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
 //ENDER5
-#define INVERT_E0_DIR true
+// BMG Clone is not inverted
+#define INVERT_E0_DIR false
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
