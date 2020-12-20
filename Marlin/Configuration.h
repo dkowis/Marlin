@@ -823,7 +823,9 @@
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 93 }
 // Bondtech BMG starts with 415 steps per unit when using 16 steps
 //Going back to 16 steps, because I think it'll work better. Maybe?
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 415 }
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 415 }
+// Adjusting extruder rate to about 97%, because that's what I've been setting flow rate to
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 403 }
 //ENDER5 settings for 128 steps
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 6400, 744 }
 //ENDER5 settings for 256 steps <-- didn't seem to work well
@@ -1082,12 +1084,9 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-//ENDER5 NOT CORRECT !!! TODO
-//Updating for Hero ME Gen 5 and V6 hotend.
-//54 Left of hotend
-//14 ahead
-// #define NOZZLE_TO_PROBE_OFFSET { -43.1, 6.6, 0 }
-#define NOZZLE_TO_PROBE_OFFSET { -54.0,-14.0, 0 }
+// Definining the Zprobe offset and the z offset as well
+#define NOZZLE_TO_PROBE_OFFSET { -29.5,-7.0, -0.65 }
+//#define NOZZLE_TO_PROBE_OFFSET { -54.0,-14.0, 0 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1271,9 +1270,7 @@
 
 // The size of the print bed
 #define X_BED_SIZE 220
-// 10 Oct 2020, lost 9mm thanks to the Hero ME hotend thing
-// Until I can figure out how to move the endstop in the back, back 9mm
-#define Y_BED_SIZE 220-9
+#define Y_BED_SIZE 220
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1608,8 +1605,7 @@
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
 //#define MANUAL_X_HOME_POS 0
-// Hero ME moves it forward by 9mm
-#define MANUAL_Y_HOME_PAS -9
+//#define MANUAL_Y_HOME_PAS 0
 //#define MANUAL_Y_HOME_POS 0
 //#define MANUAL_Z_HOME_POS 0
 
