@@ -2787,7 +2787,7 @@
   //ENDER5 settings for the 32 microsteps native
   #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
-    #define X_STALL_SENSITIVITY  65
+    #define X_STALL_SENSITIVITY  63 //63 seems to be what I want for X currently
     #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
     #define Y_STALL_SENSITIVITY  89
     #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
